@@ -1,0 +1,16 @@
+{
+  "name": "kapitaen-ahoi-multiplayer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Schlanker WebSocket-Relay-Server für den Kapitän-Ahoi-Multiplayer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  }
+}
