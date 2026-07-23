@@ -35,7 +35,7 @@ wss.on("connection", (ws) => {
   const farbe = FARBEN[Math.floor(Math.random() * FARBEN.length)];
   spieler.set(id, { ws, state: null, farbe, name: "Kapitän " + id });
 
-  sendeAn(ws, { typ: "willkommen", id, farbe });
+  sendeAn(ws, { typ: "willkommen", id, farbe, serverZeit: Date.now() });
 
   // Dem Neuankömmling den aktuellen Stand aller anderen mitteilen
   for (const [oid, o] of spieler) {
@@ -55,7 +55,7 @@ wss.on("connection", (ws) => {
     if (!p) return;
 
     if (msg.typ === "zustand") {
-      p.state = { x: msg.x, z: msg.z, richtung: msg.richtung, sinkt: !!msg.sinkt };
+      p.state = { x: msg.x, z: msg.z, richtung: msg.richtung, sinkt: !!msg.sinkt, fahrzeugTyp: msg.fahrzeugTyp || "titanic" };
       broadcast({ typ: "zustand", id, farbe: p.farbe, ...p.state }, ws);
     } else if (msg.typ === "hupe") {
       broadcast({ typ: "hupe", id }, ws);
